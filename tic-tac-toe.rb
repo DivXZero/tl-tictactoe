@@ -71,7 +71,11 @@ def player_turn(board)
   player_position_accepted = false
   until player_choice > 0 && player_choice < 10 && player_position_accepted
     player_choice = get_input('Choose an open position (1-9)').to_i
-    position_set?(board, player_choice) ? puts 'Position is already taken. Please choose another.' : player_position_accepted = true
+    if position_set?(board, player_choice)
+      puts 'Position is already taken. Please choose another.'
+    else
+      player_position_accepted = true
+    end
   end
   set_position(board, player_choice, 1)
   draw_board(board)
